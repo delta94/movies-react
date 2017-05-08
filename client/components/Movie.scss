@@ -75,6 +75,18 @@
 	}
 }
 
+.similar {
+	width: 100%;
+	overflow-x: auto;
+
+	.movie-list {
+		flex-wrap: nowrap;
+		&__item {
+			flex: 0 0 150px;
+		}
+	}
+}
+
 .cast {
 	width: 100%;
 	overflow-x: auto;

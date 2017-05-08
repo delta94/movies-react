@@ -53,7 +53,7 @@ class Movie extends Component {
 	    axios.get( Remote('movie/' + id + '/similar') )
 	      .then(function(result) {    
 	        th.setState({
-	          similar: result.data.results.slice(0, 5)
+	          similar: result.data.results.slice(0, 10)
 	        });
 	    })
 	}
@@ -120,7 +120,12 @@ class Movie extends Component {
 						    <h3>Runtime</h3>
 						    <p>{ moment.duration(movie.runtime, 'minutes').humanize() }</p>
 					    </div>
-					    
+					    { director != false &&
+					    	<div className="movie__sidebar__section">
+							    <h3>Director</h3>
+							    <p>{ director.name }</p>
+						    </div>
+					    }
 					</aside>
 					<section className="movie__main">
 						<section className="section">
@@ -163,15 +168,17 @@ class Movie extends Component {
 									<h3>You may also like</h3>
 								</div>
 							</div>
-							<ul className="movie-list">
-						        {this.state.similar.map(function(movie) {
-						          return (
-						            <li key={ movie.id.toString() } className="movie-list__item">
-						              <MovieItem movie={ movie } />
-						            </li>
-						          );
-						        })}
-						    </ul>
+							<div className="similar">
+								<ul className="movie-list">
+							        {this.state.similar.map(function(movie) {
+							          return (
+							            <li key={ movie.id.toString() } className="movie-list__item">
+							              <MovieItem movie={ movie } />
+							            </li>
+							          );
+							        })}
+							    </ul>
+						    </div>
 					     </section>
 					</section>
 					<aside className="movie__media">
