@@ -1,0 +1,42 @@
+.search {
+	position: relative;
+	width: 600px;
+	margin: 0 auto;
+	color: #444;
+	text-align: left;
+	&__field {
+		width: 100%;
+		padding: 1rem;
+		font-size: 1.4rem;
+		height: 60px;
+	}
+	&__list {
+		position: absolute;
+		width: 100%;
+		top: 60px;
+		left: 0;
+		background-color: #fff;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		&__item {
+			&:nth-child(2n) {
+				background-color: #fafafa;
+			}
+			&__image {
+				position: absolute;
+				top: 1rem;
+				left: 1rem;
+				width: 50px;
+			}
+			&__link {
+				display: block;
+				padding: 1rem;
+				color: #444;
+				position: relative;
+				height: 105px;
+				padding-left: 85px;
+			}
+		}
+	}
+}

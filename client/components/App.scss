@@ -1,0 +1,25 @@
+
+.app__header {
+  background-color: #222;
+  padding: 3rem 0;
+  color: white;
+  text-align: center;
+  h1 {
+    margin-bottom: 1rem;   
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  font: 100% 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+@import 'App/grid';
