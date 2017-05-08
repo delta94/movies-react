@@ -13,13 +13,15 @@ class Movies extends Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	      movies: []
+	     	movies: []
 	    };
-	  }
+	}
 
-	  componentDidMount() {
+	
+
+	componentDidMount() {
 	    var th = this;
-	    axios.get( Remote('movie/popular') )
+	    axios.get( Remote('movie/' + this.props.type) )
 	      .then(function(result) {   
 	        
 	        th.setState({
@@ -27,7 +29,7 @@ class Movies extends Component {
 	        });
 
 	    })
-	  }
+	}
 
 	render() {
 	    return (
@@ -46,5 +48,9 @@ class Movies extends Component {
 	}
 
 }
+
+Movies.defaultProps = {
+	type: 'popular'
+};
 
 export default Movies;

@@ -1,19 +1,32 @@
 .search {
 	position: relative;
-	width: 600px;
-	margin: 0 auto;
 	color: #444;
 	text-align: left;
+	flex-grow: 1;
 	&__field {
 		width: 100%;
-		padding: 1rem;
-		font-size: 1.4rem;
-		height: 60px;
+		padding: 2rem 1rem 2rem 32px;
+		font-size: 1rem;
+		background-color: transparent;
+		border: none;
+		color:#fff;
+		opacity: .5;
+		background: url('search.svg') no-repeat center left;
+		background-size: 20px 20px;
+		&:placeholder-shown {
+		    opacity: .5;
+		}
+		&:focus {
+			outline: none;
+			opacity: 1;
+		}
+		//height: 60px;
 	}
 	&__list {
 		position: absolute;
 		width: 100%;
-		top: 60px;
+		max-width: 600px;
+		top: 83px;
 		left: 0;
 		background-color: #fff;
 		margin: 0;

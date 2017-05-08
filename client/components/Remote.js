@@ -12,8 +12,6 @@ export function Remote(url, args) {
 
 	var serverUrl = apiUrl + url + '?' + encodeQueryData(queryData);
 
-	console.log(serverUrl);
-
 	return serverUrl;
 }
 

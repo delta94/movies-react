@@ -17,7 +17,8 @@ class Movie extends Component {
 	      movie: {},
 	      loaded: false,
 	      similar: [],
-	      credits: { cast: [], crew: [] }
+	      credits: { cast: [], crew: [] },
+	      images: { backdrops : [] }
 	    };
 	}
 
@@ -29,9 +30,11 @@ class Movie extends Component {
 	          		movie: result.data,
 	          		loaded: true
 	        	});
+	        	document.title = result.data.title;
 	      	});
 	    this.getSimilar(id);
 	    this.getCredits(id);
+	    this.getImages(id);
 	}
 
 	componentDidMount() {
@@ -58,10 +61,20 @@ class Movie extends Component {
 	getCredits(id) {
 	  	var th = this;
 	    axios.get( Remote('movie/' + id + '/credits') )
-	      .then(function(result) {  
-	        console.log(result);  
+	      .then(function(result) {   
+	      	console.log(result); 
 	        th.setState({
 	          credits: result.data
+	        });
+	    })
+	}
+
+	getImages(id) {
+	  	var th = this;
+	    axios.get( Remote('movie/' + id + '/images', { include_image_language : 'en,null' }) )
+	      .then(function(result) {  
+	        th.setState({
+	          images: result.data
 	        });
 	    })
 	}
@@ -69,7 +82,13 @@ class Movie extends Component {
 	render() {
 
 		const loaded = this.state.loaded;
-		const movie = this.state.movie
+		const movie = this.state.movie;
+
+		var director = false;
+
+		if( this.state.credits.crew.length > 0 ) {
+			director = this.state.credits.crew.find( function(element) { return element.job == 'Director' } )
+		}
 
 		let movie_html = null;
 
@@ -101,6 +120,7 @@ class Movie extends Component {
 						    <h3>Runtime</h3>
 						    <p>{ moment.duration(movie.runtime, 'minutes').humanize() }</p>
 					    </div>
+					    
 					</aside>
 					<section className="movie__main">
 						<section className="section">
@@ -125,8 +145,10 @@ class Movie extends Component {
 								<ul className="cast__list">
 							        {this.state.credits.cast.map(function(cast) {
 							          return (
-							            <li key={ cast.id.toString() } className="cast__list__item">
-							            	<img src={"https://image.tmdb.org/t/p/w500" + cast.profile_path } alt={ cast.name } className="cast__list__item__profile" />
+							            <li key={ cast.cast_id.toString() } className="cast__list__item">
+							            	{ cast.profile_path != null &&
+							            		<img src={"https://image.tmdb.org/t/p/w500" + cast.profile_path } alt={ cast.name } className="cast__list__item__profile" />
+							              	}
 							              <h4>{ cast.name }</h4>
 							              { cast.character }
 							            </li>
@@ -152,12 +174,25 @@ class Movie extends Component {
 						    </ul>
 					     </section>
 					</section>
+					<aside className="movie__media">
+						<ul className="media__list">
+					        {this.state.images.backdrops.map(function(image) {
+					          return (
+					            <li key={ image.file_path.toString() } className="media__list__item">
+					            	{ image.file_path != null &&
+					            		<img src={"https://image.tmdb.org/t/p/w500" + image.file_path } alt={ movie.title } className="media__list__item__image" />
+					              	}
+					            </li>
+					          );
+					        })}
+					    </ul>
+				    </aside>
 				</div>
 			;
 		}
 
 	    return (
-	    	<div>
+	    	<div className="container">
 	      		{ movie_html }
 	      	</div>
 	    );

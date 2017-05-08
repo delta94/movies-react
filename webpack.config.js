@@ -14,7 +14,8 @@ module.exports = {
   },
   output: {
     path: path.resolve('dist'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -26,9 +27,12 @@ module.exports = {
         loaders: ["style-loader", "css-loader", "sass-loader"]
       },
       {
-        test: /\.svg$/,
-        exclude: /node_modules/,
-        loader: 'svg-inline-loader'
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'url-loader',
+        query: {
+          limit: 1500,
+          name: 'imgs/[name].[ext]?[hash:7]'
+        }
       }
     ]
   },

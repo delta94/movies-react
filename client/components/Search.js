@@ -36,6 +36,10 @@ class Search extends Component {
 	    })
 	}*/
 
+	clearOption(event) {
+		this.setState({value: ''})
+	}
+
 	searchItems(event) {
 
 		var currentValue = event.target.value;
@@ -70,7 +74,7 @@ class Search extends Component {
 		        {this.state.movies.map(function(movie) {
 		          return (
 		            <li key={ movie.id.toString() } className="search__list__item">
-		            	<Link to={"/" + movie.id.toString() } className="search__list__item__link">
+		            	<Link to={"/" + movie.id.toString() } className="search__list__item__link" onClick="clearOption()">
 		            		<img src={"https://image.tmdb.org/t/p/w92" + movie.poster_path } alt="{ movie.title }" className="search__list__item__image" />
 							<h4 className="search__list__item__title">{ movie.title }</h4>
 							<p className="search__list__item__year">{ moment(movie.release_date).format('Y') }</p>
