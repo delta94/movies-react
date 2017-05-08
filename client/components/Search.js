@@ -38,7 +38,7 @@ class Search extends Component {
 
 	searchItems(event) {
 
-		var currentValue = encodeURI(event.target.value);
+		var currentValue = event.target.value;
 
 	    this.setState({value: currentValue});
 
@@ -50,7 +50,7 @@ class Search extends Component {
 	    	
 
 	    	var th = this;
-		    axios.get( Remote('search/movie', { query : currentValue }) )
+		    axios.get( Remote('search/movie', { query : encodeURI(currentValue) }) )
 		      .then(function(result) {   
 		        
 		        th.setState({

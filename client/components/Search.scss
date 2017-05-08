@@ -23,6 +23,9 @@
 			&:nth-child(2n) {
 				background-color: #fafafa;
 			}
+			&__title {
+				color:#444;
+			}
 			&__image {
 				position: absolute;
 				top: 1rem;
