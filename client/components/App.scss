@@ -1,5 +1,6 @@
 $body-background: #222B31;
 $body-color: #95BBD5;
+$topbar-background: #222;
 
 
 .app__header {
@@ -56,9 +57,51 @@ h1, h2, h3, h4, h5, h6 {
     }
     li {
       display: inline-block;
+      position: relative;
       a {
         display: block;
         padding: 2rem 1.5rem;
+        position: relative;
+        &:hover {
+          background-color: lighten($topbar-background, 5%);
+          + .submenu {
+            display: block;
+          }
+        }
+      }
+      &:hover {
+        .submenu {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__item {
+    &--account {
+      padding-left: 42px !important;
+      img {
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        position: absolute;
+        top: 32px;
+        left: 0;
+
+      }
+    }
+  }
+
+  .submenu {
+    position: absolute;
+    top: 83px;
+    left: 0;
+    background-color: #222;
+    display: none;
+    li {
+      display: block;
+      a {
+        padding: 1rem 1.5rem;
       }
     }
   }
@@ -67,5 +110,30 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 83px;
   }
 }
+
+@mixin scrollbars($size, $foreground-color, $background-color: transparent) {
+  ::-webkit-scrollbar {
+      width:  $size;
+      height: $size;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background: $foreground-color;
+  }
+
+  ::-webkit-scrollbar-track {
+      background: $background-color;
+      border-radius: 10px; 
+      cursor: pointer;
+  }
+
+  // For Internet Explorer
+  body {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
+@include scrollbars(.5em, rgba(#fff, .5));
 
 @import 'App/grid';

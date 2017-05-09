@@ -146,7 +146,7 @@ class Movie extends Component {
 									<h3>Cast</h3>
 								</div>
 							</div>
-							<div className="cast">
+							<div className="cast scroll">
 								<ul className="cast__list">
 							        {this.state.credits.cast.map(function(cast) {
 							          return (
