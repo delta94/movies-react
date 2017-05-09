@@ -4,6 +4,7 @@ import './Movie.scss';
 var axios = require('axios');
 
 import MovieItem from './MovieItem';
+import Rating from './Rating';
 
 import moment from 'moment';
 
@@ -18,12 +19,14 @@ class Movie extends Component {
 	      loaded: false,
 	      similar: [],
 	      credits: { cast: [], crew: [] },
-	      images: { backdrops : [] }
+	      images: { backdrops : [] },
+	      account_states : { rated : false }
 	    };
 	}
 
 	getMovie(id) {
 	    var th = this;
+	    var sessionId = localStorage.getItem('session_id');
 	    axios.get( Remote('movie/' + id) )
 	      	.then(function(result) {  
 	        	th.setState({
@@ -35,6 +38,10 @@ class Movie extends Component {
 	    this.getSimilar(id);
 	    this.getCredits(id);
 	    this.getImages(id);
+	    if(sessionId !== null) {
+	    	this.getAccountStates(id, sessionId);
+	    }
+	    
 	}
 
 	componentDidMount() {
@@ -62,7 +69,6 @@ class Movie extends Component {
 	  	var th = this;
 	    axios.get( Remote('movie/' + id + '/credits') )
 	      .then(function(result) {   
-	      	console.log(result); 
 	        th.setState({
 	          credits: result.data
 	        });
@@ -72,9 +78,20 @@ class Movie extends Component {
 	getImages(id) {
 	  	var th = this;
 	    axios.get( Remote('movie/' + id + '/images', { include_image_language : 'en,null' }) )
-	      .then(function(result) {  
+	      .then(function(result) { 
 	        th.setState({
 	          images: result.data
+	        });
+	    })
+	}
+
+	getAccountStates(id, sessionId) {
+	  	var th = this;
+	    axios.get( Remote('movie/' + id + '/account_states', { session_id : sessionId }) )
+	      .then(function(result) {  
+	      	console.log(result.data); 
+	        th.setState({
+	          account_states: result.data
 	        });
 	    })
 	}
@@ -83,11 +100,17 @@ class Movie extends Component {
 
 		const loaded = this.state.loaded;
 		const movie = this.state.movie;
+		const accountStates = this.state.account_states;
 
 		var director = false;
+		var rated = 0;
 
 		if( this.state.credits.crew.length > 0 ) {
 			director = this.state.credits.crew.find( function(element) { return element.job == 'Director' } )
+		}
+
+		if ( accountStates.rated.hasOwnProperty('value') ) {
+			rated = accountStates.rated.value;
 		}
 
 		let movie_html = null;
@@ -131,6 +154,10 @@ class Movie extends Component {
 						<section className="section">
 							<div className="row">
 								<div className="medium-12 columns">
+									<div>
+										<h3>Rate this movie</h3>
+										<Rating rating={rated} movie={movie.id} />
+									</div>
 									<h3>Sinopsis</h3>
 									<p>{ movie.overview }</p>
 									<div className="rating">

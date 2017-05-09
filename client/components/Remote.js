@@ -6,7 +6,6 @@ export function Remote(url, args) {
 	var queryData = { api_key : apiKey, language : apiLanguage }
 
 	if (typeof args !== 'undefined') {
-		console.log(args);
 		Object.assign(queryData, args); 
 	}
 
