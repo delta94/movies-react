@@ -1,3 +1,5 @@
+@import 'foundation-sites/scss/util/util';
+
 .movie {
 	position: relative;
 	&__bg {
@@ -6,7 +8,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-size: contain;
+		background-size: cover;
 		background-position: center top;
 		background-repeat: no-repeat;
     	background-attachment: fixed;
@@ -20,14 +22,20 @@
 		box-shadow: 0 8px 15px rgba(0,0,0, .4);
 	}
 	&__sidebar {
-		width: 320px;
+		@include breakpoint(medium) {
+			position: fixed;
+			top: 83px;
+			left: 0;
+			width: 320px;
+		}
 		padding: 3rem;
 		background-color: rgba(#000, .3);
-		position: fixed;
-		top: 83px;
-		left: 0;
+		position: relative;
 		z-index: 2;
 		height: 100%;
+		h1 {
+			font-size: 1.6rem;
+		}
 		&__section {
 			margin-top: 2rem;
 			h3 {
@@ -36,8 +44,13 @@
 		}
 	}
 	&__main {
-		padding-left: 320px;
-		padding-right: 320px;
+		@include breakpoint(medium) {
+			padding-left: 320px;
+		}
+		@include breakpoint(xlarge) {
+			padding-right: 320px;
+		}
+		
 	}
 	&__media {
 		position: absolute;
@@ -65,13 +78,13 @@
 	padding: 0;
 	&__item {
 		display: inline-block;
-		margin-left: .5rem;
-		margin-bottom: .5em;
+		margin-right: .5rem;
+		margin-bottom: .5rem;
 		font-size: .6rem;
 		border: 1px solid #95BBD5;
 		padding: .25rem;
-		&:first-child {
-			margin-left: 0;
+		&:last-child {
+			margin-right: 0;
 		}
 	}
 }
@@ -79,7 +92,7 @@
 .similar {
 	width: 100%;
 	overflow-x: auto;
-
+	-webkit-overflow-scrolling: touch;
 	.movie-list {
 		flex-wrap: nowrap;
 		&__item {
@@ -93,6 +106,7 @@
 	overflow-x: auto;
 	padding: 0 1rem;
 	text-align: center;
+	-webkit-overflow-scrolling: touch;
 	&__list {
 		list-style: none;
 		margin: 0;
@@ -105,6 +119,22 @@
 				margin-bottom: 1rem;
 				box-shadow: 0 4px 10px rgba(0,0,0, .2);
 			}
+		}
+	}
+}
+
+.stats {
+	display: flex;
+	list-style: none;
+	margin: 0 0 1rem;
+	padding: 0;
+	&__item {
+		font-size: .8rem;
+		padding-right: 2rem;
+		&__count {
+			color: #fff;
+			font-size: 1.6rem;
+			display: block;
 		}
 	}
 }

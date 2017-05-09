@@ -18,12 +18,15 @@ class Rating extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-	    if( this.props.rating !== nextProps.rating) 
+		/*
+		if( this.props.rating !== nextProps.rating) 
 	    {
-           this.setState({
-          		rating: nextProps.rating
-        	});
-	    }
+           
+	    }*/
+
+	    this.setState({
+      		rating: nextProps.rating
+    	});
 	}
 
 	storeRating(rating) {
@@ -36,7 +39,6 @@ class Rating extends Component {
 				    value: rating
 				})
 		      	.then(function(result) {  
-		      		console.log(result);  
 		        	th.setState({
 		          		rating: rating
 		        	});
@@ -51,7 +53,6 @@ class Rating extends Component {
 		}
 		var th = this;
 		var sessionId = localStorage.getItem('session_id');
-		console.log(sessionId);
 	    return (
 	    	<div className="rating">
 	    		<div className="stars" data-stars={ this.state.rating }>

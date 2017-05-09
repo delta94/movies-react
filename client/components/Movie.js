@@ -158,12 +158,18 @@ class Movie extends Component {
 										<h3>Rate this movie</h3>
 										<Rating rating={rated} movie={movie.id} />
 									</div>
+									<ul className="stats">
+										<li className="stats__item">
+											<span className="stats__item__count">{ movie.vote_average }</span>
+											<span className="stats__item__label">{ movie.vote_count } ratings</span>
+										</li>
+										<li className="stats__item">
+											<span className="stats__item__count">{ movie.revenue.toLocaleString('en-EN', { style: 'currency', currency: 'USD', maximumSignificantDigits: 10} ) }</span>
+											<span className="stats__item__label">revenue</span>
+										</li>
+									</ul>
 									<h3>Sinopsis</h3>
 									<p>{ movie.overview }</p>
-									<div className="rating">
-										{ movie.vote_average }
-										{ movie.vote_count }
-									</div>
 								</div>
 							</div>
 						</section>
@@ -208,7 +214,7 @@ class Movie extends Component {
 						    </div>
 					     </section>
 					</section>
-					<aside className="movie__media">
+					<aside className="movie__media show-for-xlarge">
 						<ul className="media__list">
 					        {this.state.images.backdrops.map(function(image) {
 					          return (

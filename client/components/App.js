@@ -99,7 +99,7 @@ class App extends Component {
         <Router>
           <div className="router-container">
             <nav className="top-bar">
-              <ul className="top-bar__menu">
+              <ul className="top-bar__menu show-for-medium">
                 <li><Link className="top-bar__menu__brand" to="/">React Movies</Link></li>
                 <li><Link to="/">Popular</Link></li>
                 <li><Link to="/top-rated">Top rated</Link></li>
