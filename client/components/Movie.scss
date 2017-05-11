@@ -22,17 +22,16 @@
 		box-shadow: 0 8px 15px rgba(0,0,0, .4);
 	}
 	&__sidebar {
-		@include breakpoint(medium) {
+		/*@include breakpoint(medium) {
 			position: fixed;
 			top: 83px;
 			left: 0;
 			width: 320px;
-		}
+		}*/
 		padding: 3rem;
 		background-color: rgba(#000, .3);
 		position: relative;
 		z-index: 2;
-		height: 100%;
 		h1 {
 			font-size: 1.6rem;
 		}
@@ -44,26 +43,30 @@
 		}
 	}
 	&__main {
-		@include breakpoint(medium) {
-			padding-left: 320px;
-		}
-		@include breakpoint(xlarge) {
-			padding-right: 320px;
-		}
+		overflow-y:auto;
+		min-height: 0;
+		height: 100%;
+		/*
+		position: absolute;
+		top: 0;
+		left: 320px;
+		width: 100%;*/
 		
 	}
 	&__media {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 320px;
-		z-index: 2;
-		height: 100%;
-		overflow-y:auto;
+		
+		/*position: relative;*/
 		.media__list {
 			list-style: none;
 			margin: 0;
 			padding: 0;
+			border:1px solid green;
+			overflow: visible;
+			height: 0;
+			/*position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;*/
 		}
 	}
 	.section {
@@ -104,9 +107,8 @@
 .cast {
 	width: 100%;
 	overflow-x: auto;
-	padding: 0 1rem;
 	text-align: center;
-	-webkit-overflow-scrolling: touch;
+	
 	&__list {
 		list-style: none;
 		margin: 0;

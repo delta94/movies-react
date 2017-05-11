@@ -46,6 +46,7 @@ class Movie extends Component {
 
 	componentDidMount() {
 	    this.getMovie(this.props.id);
+	    document.body.classList.add('single')
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -53,6 +54,10 @@ class Movie extends Component {
 	    {
 	           this.getMovie(nextProps.id);
 	    }
+	}
+
+	componentWillUnmount() {
+	    document.body.classList.remove('single')
 	}
 
 	getSimilar(id) {
@@ -120,7 +125,8 @@ class Movie extends Component {
 				<div className="movie">
 					<section className="movie__bg" style={ {backgroundImage: "url(https://image.tmdb.org/t/p/w1280" + movie.backdrop_path} }>
 					</section>
-					<aside className="movie__sidebar">
+					<div className="single__main">
+					<aside className="movie__sidebar single__main__sidebar single__main__sidebar--left">
 						<img className="movie__poster" src={"https://image.tmdb.org/t/p/w500" + movie.poster_path } alt="{ movie.title }" />
 						<h1>{ movie.title }</h1>
 						<div className="movie__sidebar__section">
@@ -150,7 +156,7 @@ class Movie extends Component {
 						    </div>
 					    }
 					</aside>
-					<section className="movie__main">
+					<section className="movie__main single__main__content">
 						<section className="section">
 							<div className="row">
 								<div className="medium-12 columns">
@@ -176,45 +182,45 @@ class Movie extends Component {
 						<section className="section">
 							<div className="row">
 								<div className="medium-12 columns">
-									<h3>Cast</h3>
-								</div>
+									<h3>Cast</h3>			
+									<div className="cast scroll">
+										<ul className="cast__list scroll__list">
+									        {this.state.credits.cast.map(function(cast) {
+									          return (
+									            <li key={ cast.cast_id.toString() } className="cast__list__item scroll__list__item">
+									            	{ cast.profile_path != null &&
+									            		<img src={"https://image.tmdb.org/t/p/w185" + cast.profile_path } alt={ cast.name } className="cast__list__item__profile" />
+									              	}
+									              <h4>{ cast.name }</h4>
+									              { cast.character }
+									            </li>
+									          );
+									        })}
+									    </ul>
+								   	</div>
+						   		</div>
 							</div>
-							<div className="cast scroll">
-								<ul className="cast__list">
-							        {this.state.credits.cast.map(function(cast) {
-							          return (
-							            <li key={ cast.cast_id.toString() } className="cast__list__item">
-							            	{ cast.profile_path != null &&
-							            		<img src={"https://image.tmdb.org/t/p/w500" + cast.profile_path } alt={ cast.name } className="cast__list__item__profile" />
-							              	}
-							              <h4>{ cast.name }</h4>
-							              { cast.character }
-							            </li>
-							          );
-							        })}
-							    </ul>
-						   	</div>
 					    </section>
 						<section className="section">
 							<div className="row">
 								<div className="medium-12 columns">
 									<h3>You may also like</h3>
+									<div className="similar scroll">
+										<ul className="scroll__list">
+									        {this.state.similar.map(function(movie) {
+									          return (
+									            <li key={ movie.id.toString() } className="movie-list__item scroll__list__item">
+									              <MovieItem movie={ movie } />
+									            </li>
+									          );
+									        })}
+									    </ul>
+								    </div>
 								</div>
 							</div>
-							<div className="similar">
-								<ul className="movie-list">
-							        {this.state.similar.map(function(movie) {
-							          return (
-							            <li key={ movie.id.toString() } className="movie-list__item">
-							              <MovieItem movie={ movie } />
-							            </li>
-							          );
-							        })}
-							    </ul>
-						    </div>
 					     </section>
 					</section>
-					<aside className="movie__media show-for-xlarge">
+					<aside className="movie__media show-for-xlarge single__main__sidebar single__main__sidebar--right">
 						<ul className="media__list">
 					        {this.state.images.backdrops.map(function(image) {
 					          return (
@@ -227,6 +233,7 @@ class Movie extends Component {
 					        })}
 					    </ul>
 				    </aside>
+				    </div>{/* END .single__main */}
 				</div>
 			;
 		}
