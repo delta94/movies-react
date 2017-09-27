@@ -125,8 +125,7 @@ class Movie extends Component {
 				<div className="movie">
 					<section className="movie__bg" style={ {backgroundImage: "url(https://image.tmdb.org/t/p/w1280" + movie.backdrop_path} }>
 					</section>
-					<div className="single__main">
-					<aside className="movie__sidebar single__main__sidebar single__main__sidebar--left">
+					<header className="movie__header">
 						<img className="movie__poster" src={"https://image.tmdb.org/t/p/w500" + movie.poster_path } alt="{ movie.title }" />
 						<h1>{ movie.title }</h1>
 						<div className="movie__sidebar__section">
@@ -155,7 +154,7 @@ class Movie extends Component {
 							    <p>{ director.name }</p>
 						    </div>
 					    }
-					</aside>
+					</header>
 					<section className="movie__main single__main__content">
 						<section className="section">
 							<div className="row">
@@ -220,7 +219,7 @@ class Movie extends Component {
 							</div>
 					     </section>
 					</section>
-					<aside className="movie__media show-for-xlarge single__main__sidebar single__main__sidebar--right">
+					<aside className="movie__media">
 						<ul className="media__list">
 					        {this.state.images.backdrops.map(function(image) {
 					          return (
@@ -233,7 +232,6 @@ class Movie extends Component {
 					        })}
 					    </ul>
 				    </aside>
-				    </div>{/* END .single__main */}
 				</div>
 			;
 		}
