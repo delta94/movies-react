@@ -1,3 +1,8 @@
+@import 'foundation-sites/scss/foundation';
+@import 'App/settings';
+/// include all modules of foundation
+@include foundation-everything;
+
 $body-background: #222B31;
 $body-color: #95BBD5;
 $topbar-background: #222;
@@ -19,7 +24,7 @@ img {
 }
 
 body {
-  font: 14px 'Open Sans', Helvetica, Arial, sans-serif;
+  font: 14px 'Roboto', Helvetica, Arial, sans-serif;
   background-color: #222B31;
   color: #95BBD5;
 }
@@ -35,6 +40,7 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
+  font-family: 'Lato';
   color: #fff;
 }
 
@@ -54,6 +60,7 @@ h1, h2, h3, h4, h5, h6 {
     list-style: none;
     margin: 0;
     padding: 0;
+    background: none !important;
     &__brand {
       background: url('logo.svg') no-repeat left center;
       background-size: 36px 36px;
@@ -167,12 +174,9 @@ h1, h2, h3, h4, h5, h6 {
 
 @include scrollbars(.5em, rgba(#fff, .5));
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+//@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
-@import 'foundation-sites/scss/foundation';
-@import 'App/settings';
-/// include all modules of foundation
-@include foundation-everything;
+
 
 /// or use just particular mouldes
 // @include foundation-global-styles;
