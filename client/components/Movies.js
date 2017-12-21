@@ -6,6 +6,13 @@ import MovieItem from './MovieItem';
 
 import { Remote } from './Remote';
 
+import { connect } from 'react-redux'
+
+const VisibleTodoList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Movies)
+
 import './Movies.scss';
 
 class Movies extends Component {
