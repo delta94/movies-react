@@ -6,13 +6,13 @@ import MovieItem from './MovieItem';
 
 import { Remote } from './Remote';
 
-import { connect } from 'react-redux'
-
+import { connect } from 'react-redux';
+/*
 const VisibleTodoList = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Movies)
-
+*/
 import './Movies.scss';
 
 class Movies extends Component {
@@ -24,13 +24,13 @@ class Movies extends Component {
 	    };
 	}
 
-	
+
 
 	componentDidMount() {
 	    var th = this;
 	    axios.get( Remote('movie/' + this.props.type) )
-	      .then(function(result) {   
-	        
+	      .then(function(result) {
+
 	        th.setState({
 	          movies: result.data.results
 	        });

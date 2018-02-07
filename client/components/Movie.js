@@ -28,7 +28,7 @@ class Movie extends Component {
 	    var th = this;
 	    var sessionId = localStorage.getItem('session_id');
 	    axios.get( Remote('movie/' + id) )
-	      	.then(function(result) {  
+	      	.then(function(result) {
 	        	th.setState({
 	          		movie: result.data,
 	          		loaded: true
@@ -41,7 +41,7 @@ class Movie extends Component {
 	    if(sessionId !== null) {
 	    	this.getAccountStates(id, sessionId);
 	    }
-	    
+
 	}
 
 	componentDidMount() {
@@ -50,7 +50,7 @@ class Movie extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-	    if( this.props.id !== nextProps.id) 
+	    if( this.props.id !== nextProps.id)
 	    {
 	           this.getMovie(nextProps.id);
 	    }
@@ -63,7 +63,7 @@ class Movie extends Component {
 	getSimilar(id) {
 	  	var th = this;
 	    axios.get( Remote('movie/' + id + '/similar') )
-	      .then(function(result) {    
+	      .then(function(result) {
 	        th.setState({
 	          similar: result.data.results.slice(0, 10)
 	        });
@@ -73,7 +73,7 @@ class Movie extends Component {
 	getCredits(id) {
 	  	var th = this;
 	    axios.get( Remote('movie/' + id + '/credits') )
-	      .then(function(result) {   
+	      .then(function(result) {
 	        th.setState({
 	          credits: result.data
 	        });
@@ -83,7 +83,7 @@ class Movie extends Component {
 	getImages(id) {
 	  	var th = this;
 	    axios.get( Remote('movie/' + id + '/images', { include_image_language : 'en,null' }) )
-	      .then(function(result) { 
+	      .then(function(result) {
 	        th.setState({
 	          images: result.data
 	        });
@@ -93,8 +93,8 @@ class Movie extends Component {
 	getAccountStates(id, sessionId) {
 	  	var th = this;
 	    axios.get( Remote('movie/' + id + '/account_states', { session_id : sessionId }) )
-	      .then(function(result) {  
-	      	console.log(result.data); 
+	      .then(function(result) {
+	      	console.log(result.data);
 	        th.setState({
 	          account_states: result.data
 	        });
@@ -121,7 +121,7 @@ class Movie extends Component {
 		let movie_html = null;
 
 		if(loaded) {
-			movie_html = 
+			movie_html =
 				<div className="movie">
 					<section className="movie__bg" style={ {backgroundImage: "url(https://image.tmdb.org/t/p/w1280" + movie.backdrop_path} }>
 					</section>
@@ -181,17 +181,21 @@ class Movie extends Component {
 						<section className="section">
 							<div className="row">
 								<div className="medium-12 columns">
-									<h3>Cast</h3>			
+									<h3>Cast</h3>
 									<div className="cast scroll">
 										<ul className="cast__list scroll__list">
 									        {this.state.credits.cast.map(function(cast) {
 									          return (
 									            <li key={ cast.cast_id.toString() } className="cast__list__item scroll__list__item">
+																<span className="cast__list__item__image">
 									            	{ cast.profile_path != null &&
 									            		<img src={"https://image.tmdb.org/t/p/w185" + cast.profile_path } alt={ cast.name } className="cast__list__item__profile" />
 									              	}
+																</span>
+																<span className="cast__list__item__name">
 									              <h4>{ cast.name }</h4>
 									              { cast.character }
+																</span>
 									            </li>
 									          );
 									        })}

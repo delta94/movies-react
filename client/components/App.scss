@@ -1,7 +1,8 @@
-@import 'foundation-sites/scss/foundation';
+//@import 'foundation-sites/scss/foundation';
 @import 'App/settings';
 /// include all modules of foundation
-@include foundation-everything;
+//@include foundation-everything;
+@import 'foundation-sites/scss/util/util';
 
 $body-background: #222B31;
 $body-color: #95BBD5;
@@ -9,13 +10,8 @@ $topbar-background: #222;
 
 
 .app__header {
-  background-color: #222;
-  padding: 3rem 0;
+  padding: 2rem 2rem;
   color: white;
-  text-align: center;
-  h1 {
-    margin-bottom: 1rem;   
-  }
 }
 
 img {
@@ -24,7 +20,7 @@ img {
 }
 
 body {
-  font: 14px 'Roboto', Helvetica, Arial, sans-serif;
+  font: 100% 'Roboto', Helvetica, Arial, sans-serif;
   background-color: #222B31;
   color: #95BBD5;
 }
@@ -49,23 +45,82 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 1rem;
 }
 
-.top-bar {
+.router-container {
+  display: grid;
+  grid-template-columns: 130px auto;
+  grid-template-rows: 100px auto;
+  grid-template-areas:
+      "brand top-bar"
+      "aside main";
+}
+
+.container {
+  grid-area: main;
+  max-width: 100%;
+  //
+  overflow: hidden;
+}
+
+.single {
+  .container {
+    max-height: 100%;
+  }
+}
+
+.aside {
+  grid-area: aside;
   background-color: #222;
+  text-align: center;
+  &__nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    &__item {
+      display: block;
+      padding: 3rem 1rem 2rem;
+      color: #fff;
+      background-size: 24px 24px;
+      background-repeat: no-repeat;
+      background-position: center 1rem;
+      &--popular {
+        background-image: url('icon/popular.svg');
+      }
+      &--top-rated {
+        background-image: url('icon/top-rated.svg');
+      }
+      &--now-playing {
+        background-image: url('icon/now-playing.svg');
+      }
+    }
+  }
+}
+
+.top-bar-brand {
+  grid-area: brand;
+  background: url('logo.svg') no-repeat center;
+  background-size: 50px 50px;
+  padding-left: 42px !important;
+  text-indent: -9999px;
+  background-color: #222;
+}
+
+.top-bar {
+  border-bottom:2px solid #222;
   //position: fixed;
   z-index: 50;
   width: 100%;
   display: flex;
-  padding: 0 !important;
+  padding-left: 2rem;
+  grid-area: top-bar;
   &__menu {
     list-style: none;
     margin: 0;
     padding: 0;
     background: none !important;
     &__brand {
-      background: url('logo.svg') no-repeat left center;
-      background-size: 36px 36px;
-      padding-left: 42px !important;
-      color: #fff;
+
     }
     li {
       display: inline-block;
@@ -118,10 +173,6 @@ h1, h2, h3, h4, h5, h6 {
       }
     }
   }
-
-  + .container {
-    padding-top: 83px;
-  }
 }
 
 @mixin scrollbars($size, $foreground-color, $background-color: transparent) {
@@ -136,7 +187,7 @@ h1, h2, h3, h4, h5, h6 {
 
   ::-webkit-scrollbar-track {
       background: $background-color;
-      border-radius: 10px; 
+      border-radius: 10px;
       cursor: pointer;
   }
 
@@ -150,20 +201,22 @@ h1, h2, h3, h4, h5, h6 {
 .scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  overflow-y: hidden;
   &__list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     &__item {
+      max-width: 150px;
       &:first-child {
-        padding-left: 0 !important; 
+        padding-left: 0 !important;
         a {
           padding-left: 0 !important;
-        }     
+        }
       }
       img {
-        max-width: 130px;
+        //
       }
     }
     h4 {

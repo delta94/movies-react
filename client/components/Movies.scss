@@ -1,21 +1,24 @@
 @import 'foundation-sites/scss/util/util';
 
 .movie-list {
-  display: flex;
+  display: grid;
   list-style: none;
   margin: 0 auto;
-  max-width: 1200px;
+  grid-gap: 10px;
+
+	grid-auto-flow: dense;
   padding: 1rem;
-  flex-wrap: wrap;
+  @media screen and (min-width: 600px) {
+		grid-template-columns: repeat(3, 3fr);
+	}
+  @media screen and (min-width: 960px) {
+		grid-template-columns: repeat(4, 3fr);
+	}
+  @media screen and (min-width: 1400px) {
+		grid-template-columns: repeat(6, 3fr);
+	}
   &__item {
-    width: 50%;
-    @include breakpoint(medium) {
-      width: 33.33%;
-    }
-    @include breakpoint(large) {
-      width: 20%;
-    }
-    
+
     &__poster {
       margin-bottom: 1rem;
       box-shadow: 0 3px 8px rgba(#000, .5);
@@ -49,6 +52,8 @@
       font-size: 1rem;
       color:#fff;
       font-weight: normal;
+      margin-top: 1.5rem;
+      margin-bottom: .5rem;
     }
     &__link {
       display: block;
